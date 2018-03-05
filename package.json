@@ -1,0 +1,22 @@
+{
+  "name": "letsroll",
+  "version": "0.0.2",
+  "description": "Rolling with a different function curve",
+  "main": "roll.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kelier/letsroll.git"
+  },
+  "keywords": [
+    "scroll"
+  ],
+  "author": "yan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kelier/letsroll/issues"
+  },
+  "homepage": "https://github.com/Kelier/letsroll#readme"
+}
