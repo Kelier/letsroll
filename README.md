@@ -1,5 +1,7 @@
 ### Look This
 
+[![NPM](https://nodei.co/npm/letsroll.png?mini=true)](https://nodei.co/npm/letsroll/)
+
 that's my first npm package.
 
 它用jS进行构造简单的滑动效果，我已经在项目里添加了demo文件
