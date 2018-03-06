@@ -1,6 +1,6 @@
 {
   "name": "letsroll",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Rolling with a different function curve",
   "main": "roll.js",
   "scripts": {
