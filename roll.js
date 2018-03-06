@@ -15,7 +15,7 @@ var roll = function (options) {
         delay: 50,     // 定时器时间
         callback: null,   // 回调函数
         area: 'dom',   // 作用的dom区域
-        type: 'uni-deceler'  // 定义运动类型
+        type: 'uni-acceler'  // 定义运动类型
     };
     var opts = Object.assign(defaults, options);
     var timer = null;
@@ -41,7 +41,7 @@ var roll = function (options) {
     var getCompute = function (flag, axis) {
         // const
         var curGap = _this[flag]; // 滚动条
-        var subGap = axis - curGap;    // 目标-当前值
+        var subGap = Math.abs(axis - curGap);    // 目标-当前值
         var a = Math.round(2 * subGap / Math.pow((opts.durTime * 0.001), 2)); //加速度
 
         return {
@@ -54,13 +54,15 @@ var roll = function (options) {
     };
 
     var smoothScroll = function (aim) {
+        
+        
         index++;
         var a = aim.a;
         var curGap = aim.curGap;
         var subGap = aim.subGap;
         var to = aim.to;
         var axis = aim.target;
-
+        
         var v0 = Math.sqrt(2 * a * subGap); // 初速度
         var hop = a * Math.pow(opts.delay * 0.001, 2) / 2;  // 第一段位移
         if (index >= dur) {
@@ -75,18 +77,20 @@ var roll = function (options) {
             switch (opts.type) {
                 // 匀加速运动
                 case "uni-acceler":
-                    _this[to] = curGap + Math.pow(index, 2) * hop;
+                    var isRay = axis - curGap > 0 ? 1 : -1;
+                    _this[to] = curGap +  isRay * Math.pow(index, 2) * hop;
                     break;
                 // 匀减速运动
                 case "uni-deceler":
                     var v_s = v0 - a * opts.delay * 0.001 * (index - 1);
                     var v_e = v0 - a * opts.delay * 0.001 * index;
                     curGap = _this[to];
-                    _this[to] = curGap + ((Math.pow(v_s, 2) - Math.pow(v_e, 2)) / 2 / a);
+                    var isRay = axis - curGap > 0 ? 1 : -1;
+                    _this[to] = curGap + isRay * ((Math.pow(v_s, 2) - Math.pow(v_e, 2)) / 2 / a);
                     break;
                 //  匀速运动  
                 case "uniform":
-                    var v0 = axis / (opts.durTime * 0.001);
+                    var v0 = (axis - curGap) / (opts.durTime * 0.001);
                     _this[to] = curGap + v0 * opts.delay * 0.001 * index;
                     break;
             }

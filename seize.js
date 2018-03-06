@@ -38,7 +38,7 @@ var seize = (function () {
         target.style.lineHeight = options.gap;
         target.innerText = template;
         
-    }
+    };
     
     return {
         set: set
